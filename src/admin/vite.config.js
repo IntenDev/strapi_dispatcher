@@ -9,7 +9,7 @@ module.exports = (config) => {
       },
     },
   server: {
-      allowedHosts: true
+      allowedHosts: ['dev.goodscar.ru']
     },
   });
 };

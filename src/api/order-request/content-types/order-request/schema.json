@@ -1,0 +1,93 @@
+{
+  "kind": "collectionType",
+  "collectionName": "order_requests",
+  "info": {
+    "singularName": "order-request",
+    "pluralName": "order-requests",
+    "displayName": "OrderRequest"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "orderNumber": {
+      "type": "string"
+    },
+    "orderStatus": {
+      "type": "enumeration",
+      "required": true,
+      "default": "Новый",
+      "enum": [
+        "Новый",
+        "В доставке",
+        "Ожидает",
+        "Принят",
+        "Выполнен",
+        "Закончен"
+      ]
+    },
+    "loadingCity": {
+      "type": "string",
+      "required": true
+    },
+    "loadingAddress": {
+      "type": "text",
+      "required": true
+    },
+    "unloadingCity": {
+      "type": "string",
+      "required": true
+    },
+    "unloadingAddress": {
+      "type": "text",
+      "required": true
+    },
+    "loadingDate": {
+      "type": "date",
+      "required": true
+    },
+    "customerName": {
+      "type": "string",
+      "required": true
+    },
+    "phone": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email"
+    },
+    "cargoName": {
+      "type": "string"
+    },
+    "cargoWeight": {
+      "type": "decimal"
+    },
+    "cargoVolume": {
+      "type": "decimal"
+    },
+    "vehicleType": {
+      "type": "enumeration",
+      "enum": [
+        "Тент",
+        "Рефрижератор",
+        "Фургон",
+        "Контейнер",
+        "Платформа",
+        "Эвакуатор",
+        "Манипулятор",
+        "Другое"
+      ]
+    },
+    "price": {
+      "type": "biginteger"
+    },
+    "comment": {
+      "type": "text"
+    },
+    "managerComment": {
+      "type": "text"
+    }
+  }
+}

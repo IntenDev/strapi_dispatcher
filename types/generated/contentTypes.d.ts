@@ -458,6 +458,7 @@ export interface ApiAboutAbout extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    defaultSeo: Schema.Attribute.Component<'shared.seo', false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::about.about'> &
       Schema.Attribute.Private;
@@ -602,6 +603,73 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+  };
+}
+
+export interface ApiOrderRequestOrderRequest
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'order_requests';
+  info: {
+    displayName: 'OrderRequest';
+    pluralName: 'order-requests';
+    singularName: 'order-request';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    cargoName: Schema.Attribute.String;
+    cargoVolume: Schema.Attribute.Decimal;
+    cargoWeight: Schema.Attribute.Decimal;
+    comment: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    customerName: Schema.Attribute.String & Schema.Attribute.Required;
+    email: Schema.Attribute.Email;
+    loadingAddress: Schema.Attribute.Text & Schema.Attribute.Required;
+    loadingCity: Schema.Attribute.String & Schema.Attribute.Required;
+    loadingDate: Schema.Attribute.Date & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::order-request.order-request'
+    > &
+      Schema.Attribute.Private;
+    managerComment: Schema.Attribute.Text;
+    orderNumber: Schema.Attribute.String;
+    orderStatus: Schema.Attribute.Enumeration<
+      [
+        '\u041D\u043E\u0432\u044B\u0439',
+        '\u0412 \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0435',
+        '\u041E\u0436\u0438\u0434\u0430\u0435\u0442',
+        '\u041F\u0440\u0438\u043D\u044F\u0442',
+        '\u0412\u044B\u043F\u043E\u043B\u043D\u0435\u043D',
+        '\u0417\u0430\u043A\u043E\u043D\u0447\u0435\u043D',
+      ]
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'\u041D\u043E\u0432\u044B\u0439'>;
+    phone: Schema.Attribute.String & Schema.Attribute.Required;
+    price: Schema.Attribute.BigInteger;
+    publishedAt: Schema.Attribute.DateTime;
+    unloadingAddress: Schema.Attribute.Text & Schema.Attribute.Required;
+    unloadingCity: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    vehicleType: Schema.Attribute.Enumeration<
+      [
+        '\u0422\u0435\u043D\u0442',
+        '\u0420\u0435\u0444\u0440\u0438\u0436\u0435\u0440\u0430\u0442\u043E\u0440',
+        '\u0424\u0443\u0440\u0433\u043E\u043D',
+        '\u041A\u043E\u043D\u0442\u0435\u0439\u043D\u0435\u0440',
+        '\u041F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430',
+        '\u042D\u0432\u0430\u043A\u0443\u0430\u0442\u043E\u0440',
+        '\u041C\u0430\u043D\u0438\u043F\u0443\u043B\u044F\u0442\u043E\u0440',
+        '\u0414\u0440\u0443\u0433\u043E\u0435',
+      ]
+    >;
   };
 }
 
@@ -1121,6 +1189,7 @@ declare module '@strapi/strapi' {
       'api::author.author': ApiAuthorAuthor;
       'api::category.category': ApiCategoryCategory;
       'api::global.global': ApiGlobalGlobal;
+      'api::order-request.order-request': ApiOrderRequestOrderRequest;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
